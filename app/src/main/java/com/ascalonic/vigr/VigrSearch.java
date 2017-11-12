@@ -18,12 +18,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VigrSearch extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class VigrSearch extends AppCompatActivity{
 
     ProgressDialog progressDialog;
 
     Spinner spinPlace,spinSpecs;
     public static String selectedPlace,selectedSpec;
+
+    List<String> specs,places;
 
 
     @Override
@@ -74,11 +76,9 @@ public class VigrSearch extends AppCompatActivity implements AdapterView.OnItemS
                 // Spinner element
                 spinSpecs = (Spinner) findViewById(R.id.spinSpecs);
 
-                // Spinner click listener
-                spinSpecs.setOnItemSelectedListener(VigrSearch.this);
 
                 // Spinner Drop down elements
-                List<String> specs = new ArrayList<String>();
+                specs = new ArrayList<String>();
 
                 // Creating adapter for spinner
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, specs);
@@ -125,11 +125,9 @@ public class VigrSearch extends AppCompatActivity implements AdapterView.OnItemS
                         // Spinner element
                         spinPlace = (Spinner) findViewById(R.id.spinPlaces);
 
-                        // Spinner click listener
-                        spinPlace.setOnItemSelectedListener(VigrSearch.this);
 
                         // Spinner Drop down elements
-                        List<String> places = new ArrayList<String>();
+                        places = new ArrayList<String>();
 
                         // Creating adapter for spinner
                         ArrayAdapter<String> placesAdapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, places);
@@ -176,29 +174,11 @@ public class VigrSearch extends AppCompatActivity implements AdapterView.OnItemS
         SSI.execute();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
-
-        if(view==spinPlace)
-        {
-            selectedPlace=item;
-        }
-        else if(view==spinSpecs)
-        {
-            selectedSpec=item;
-        }
-
-    }
-
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-    }
-
     public void searchDoctor(View v)
     {
+        selectedPlace = spinPlace.getSelectedItem().toString();
+        selectedSpec = spinSpecs.getSelectedItem().toString();
+
         showSearchProgress();
 
         SearchServerInterface SSI=new SearchServerInterface(getBaseContext(), new AsyncResponse() {

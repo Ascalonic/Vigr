@@ -20,12 +20,16 @@ public class VigrDoctors extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vigr_doctors);
 
+        setTitle("Vigr - Search Results");
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_docs);
 
         docAdapter = new DoctorAdapter(docslist);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(docAdapter);
     }
 }
