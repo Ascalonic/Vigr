@@ -5,6 +5,14 @@
     <string name="phone_num_confirm">Confirm</string>
     <string name="phone_num_hint">Your phone number</string>
 
+    <string name="make_appointment">Make an Appointment</string>
+    <string name="view_appointment">View my Appointments</string>
+
+    <string name="lab_place">Place</string>
+    <string name="lab_spec">Specialisation</string>
+
+    <string name="cmd_search">Search</string>
+
     <string name="preference_file">com.ascalonic.vigr.PREFERENCE_FILE_KEY</string>
 
 </resources>

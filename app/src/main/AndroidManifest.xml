@@ -28,7 +28,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".VigrConsole"></activity>
+        <activity android:name=".VigrConsole" />
+        <activity android:name=".VigrSearch"></activity>
     </application>
 
 </manifest>
