@@ -29,7 +29,8 @@
         </receiver>
 
         <activity android:name=".VigrConsole" />
-        <activity android:name=".VigrSearch"></activity>
+        <activity android:name=".VigrSearch" />
+        <activity android:name=".VigrDoctors"></activity>
     </application>
 
 </manifest>

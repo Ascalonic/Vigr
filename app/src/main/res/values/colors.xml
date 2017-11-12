@@ -6,4 +6,7 @@
 
     <color name="mainTextColor">#ffffff</color>
 
+    <color name="hospName">#d44e4e</color>
+    <color name="specName">#4359a1</color>
+
 </resources>

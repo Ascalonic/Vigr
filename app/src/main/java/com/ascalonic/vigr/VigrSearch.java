@@ -45,6 +45,17 @@ public class VigrSearch extends AppCompatActivity implements AdapterView.OnItemS
         progressDialog.show();
     }
 
+    private void showSearchProgress()
+    {
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Please wait...");
+        progressDialog.setMessage("Searching for doctors...");
+        progressDialog.show();
+    }
+
     @Override
     public void onStart()
     {
@@ -184,6 +195,53 @@ public class VigrSearch extends AppCompatActivity implements AdapterView.OnItemS
 
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
+    }
+
+    public void searchDoctor(View v)
+    {
+        showSearchProgress();
+
+        SearchServerInterface SSI=new SearchServerInterface(getBaseContext(), new AsyncResponse() {
+            @Override
+            public void processFinish(String output) {
+
+                Log.d("CONN_TEST","out:" + output);
+
+                VigrDoctors.docslist = new ArrayList<>();
+
+                progressDialog.dismiss();
+
+                try
+                {
+                    JSONArray json = new JSONArray(output);
+
+                    for(int i=0;i<json.length();i++){
+
+                        JSONObject e = json.getJSONObject(i);
+
+                        int doc_id = e.getInt("doc_id");
+                        String doc_name = e.getString("doc_name");
+                        String hosp_name = e.getString("hosp_name");
+                        String place = e.getString("dist_name");
+                        String spec_name = selectedSpec;
+
+                        VigrDoctor vd=new VigrDoctor(doc_id,doc_name,hosp_name,spec_name,place);
+                        VigrDoctors.docslist.add(vd);
+                    }
+                }
+                catch(JSONException jex)
+                {
+                    //nothin' for now
+                }
+
+                Intent i=new Intent(getBaseContext(), VigrDoctors.class);
+                startActivity(i);
+
+            }
+
+        },2);
+
+        SSI.execute(selectedPlace,selectedSpec);
     }
 
 }

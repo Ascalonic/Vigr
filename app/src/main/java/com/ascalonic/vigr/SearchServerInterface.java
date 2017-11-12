@@ -116,6 +116,54 @@ public class SearchServerInterface extends AsyncTask<String, Void, String> {
                 msg = new String("Exception: " + e.getMessage());
             }
         }
+        else if(myflag==2) {
+            try {
+
+                String place = (String) arg0[0];
+                String spec = (String) arg0[1];
+
+                String link = MainActivity.BASE_DOMAIN + "searchdoc.php";
+
+                String data = URLEncoder.encode("place", "UTF-8") + "=" +
+                        URLEncoder.encode(place, "UTF-8");
+                data += "&" + URLEncoder.encode("spec", "UTF-8") + "=" +
+                        URLEncoder.encode(spec, "UTF-8");
+
+                //Log.d(data,"CONN_TEST");
+
+                URL url = new URL(link);
+
+                HttpURLConnection urlConnection =
+                        (HttpURLConnection) url.openConnection();
+
+                ///////////////////
+                urlConnection.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
+
+                wr.write(data);
+                wr.flush();
+                /////////////////////
+
+                InputStream in = urlConnection.getInputStream();
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                // Read Server Response
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                    break;
+                }
+                msg = sb.toString();
+
+
+            } catch (Exception e) {
+
+                msg = new String("Exception: " + e.getMessage());
+            }
+        }
 
         return msg;
 
