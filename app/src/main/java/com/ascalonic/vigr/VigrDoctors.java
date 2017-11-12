@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +33,18 @@ public class VigrDoctors extends AppCompatActivity {
 
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(docAdapter);
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                VigrDoctor doctor = docslist.get(position);
+                Toast.makeText(getApplicationContext(), doctor.getDocName() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 }
