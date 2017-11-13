@@ -13,6 +13,14 @@
 
     <string name="cmd_search">Search</string>
 
+    <string name="cmd_seldate">Select Date</string>
+
+    <string name="patient_name_prompt">Name</string>
+    <string name="patient_dob_prompt">Date Of Birth</string>
+    <string name="patient_dob_gender">Gender</string>
+
+    <string name="patient_dob_hint">dd/mm/yy</string>
+
     <string name="preference_file">com.ascalonic.vigr.PREFERENCE_FILE_KEY</string>
 
 </resources>

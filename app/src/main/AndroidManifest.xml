@@ -30,7 +30,9 @@
 
         <activity android:name=".VigrConsole" />
         <activity android:name=".VigrSearch" />
-        <activity android:name=".VigrDoctors"></activity>
+        <activity android:name=".VigrDoctors" />
+        <activity android:name=".MakeAppointment" />
+        <activity android:name=".PatientDetails"></activity>
     </application>
 
 </manifest>
