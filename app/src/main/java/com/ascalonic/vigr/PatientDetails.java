@@ -1,21 +1,36 @@
 package com.ascalonic.vigr;
 
+import android.Manifest;
+import android.accounts.AccountManager;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.provider.CalendarContract;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
-public class PatientDetails extends AppCompatActivity {
+public class PatientDetails extends AppCompatActivity{
 
     EditText txtPatientName, txtPatientDOB;
     Spinner spinGender;
@@ -30,8 +45,6 @@ public class PatientDetails extends AppCompatActivity {
         spinGender=(Spinner)findViewById(R.id.spinGender);
 
         setTitle("Patient Details");
-
-
 
         // Spinner Drop down elements
         ArrayList gender = new ArrayList<String>();
@@ -98,6 +111,28 @@ public class PatientDetails extends AppCompatActivity {
 
             if(curdate.after(d))
             {
+                //Add event---------------------------------------------------------------------
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType("vnd.android.cursor.item/event");
+                intent.putExtra(CalendarContract.Events.TITLE, "Calender Test");
+                intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "Trivandrum");
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, "Appointment Test");
+
+                // Setting dates
+                GregorianCalendar calDate = new GregorianCalendar(MakeAppointment.selectedYear,MakeAppointment.selectedMonth,MakeAppointment.selectedDay);
+                intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                        calDate.getTimeInMillis());
+                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+                        calDate.getTimeInMillis());
+
+                // make it a full day event
+                intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+
+                // Making it private and shown as busy
+                intent.putExtra(CalendarContract.Events.ACCESS_LEVEL, CalendarContract.Events.ACCESS_PRIVATE);
+                intent.putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
+
+                startActivity(intent);
 
             }
             else
@@ -115,3 +150,4 @@ public class PatientDetails extends AppCompatActivity {
 
     }
 }
+
