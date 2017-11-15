@@ -29,7 +29,8 @@ public class AccessManager{
 
     public String getAccessToken()
     {
-        String ret = sharedPref.getString("ACCESS_TOKEN","102e164eb646802e91ff1d37a60353d1cdabf537");
+        //String ret = sharedPref.getString("ACCESS_TOKEN","102e164eb646802e91ff1d37a60353d1cdabf537");
+        String ret = sharedPref.getString("ACCESS_TOKEN","");
         return ret;
     }
 
@@ -42,7 +43,8 @@ public class AccessManager{
 
     public String getPhone()
     {
-        String ret = sharedPref.getString("PHONE_NUM","9400346491");
+        //String ret = sharedPref.getString("PHONE_NUM","9400346491");
+        String ret = sharedPref.getString("PHONE_NUM","");
         return ret;
     }
 

@@ -145,6 +145,8 @@ public class PatientDetails extends AppCompatActivity{
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 //Do Nothing
+                Intent i=new Intent(getBaseContext(),GoogleCalAdd.class);
+                startActivity(i);
             }
         });
 
@@ -171,6 +173,7 @@ public class PatientDetails extends AppCompatActivity{
 
                     JSONObject res = (new JSONObject(output));
                     Boolean success = res.getBoolean("success");
+                    GoogleCalAdd.appo_id = res.getInt("appoid");
 
                     showAppoCreationStatus(success);
                 }

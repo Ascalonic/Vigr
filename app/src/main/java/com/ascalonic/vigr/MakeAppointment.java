@@ -62,7 +62,7 @@ public class MakeAppointment extends AppCompatActivity {
 
     public void selectDate(View v) {
         selectedDay = dp.getDayOfMonth();
-        selectedMonth = dp.getMonth();
+        selectedMonth = dp.getMonth()+1;
         selectedYear = dp.getYear();
 
         Calendar c = Calendar.getInstance();

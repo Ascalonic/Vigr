@@ -34,9 +34,8 @@
         <activity android:name=".VigrSearch" />
         <activity android:name=".VigrDoctors" />
         <activity android:name=".MakeAppointment" />
-        <activity android:name=".PatientDetails"></activity>
-
-
+        <activity android:name=".PatientDetails" />
+        <activity android:name=".GoogleCalAdd"></activity>
     </application>
 
 </manifest>
