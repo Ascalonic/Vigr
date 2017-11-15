@@ -40,6 +40,7 @@ public class VigrDoctors extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                selectedDoc = new VigrDoctor();
                 selectedDoc = docslist.get(position);
 
                 Intent i=new Intent(getBaseContext(),MakeAppointment.class);
